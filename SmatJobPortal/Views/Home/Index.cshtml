@@ -2,7 +2,57 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Find Your Dream Job Today</h1>
+            <p>Thousands of jobs waiting for you to discover</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Job title, keywords">
+                <input type="text" placeholder="Location">
+                <button class="btn">Search</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="categories">
+    <div class="container">
+        <h2>Popular Categories</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <i class="fas fa-code"></i>
+                <h3>Software Development</h3>
+                <p>1,200 Jobs</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Marketing</h3>
+                <p>850 Jobs</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-briefcase-medical"></i>
+                <h3>Healthcare</h3>
+                <p>1,500 Jobs</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Education</h3>
+                <p>700 Jobs</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="featured-jobs">
+    <div class="container">
+        <h2>Featured Jobs</h2>
+        <div class="job-list" id="featuredJobs">
+            <!-- Jobs will be loaded via JavaScript -->
+        </div>
+        <div class="text-center">
+            <a href="jobs/list.html" class="btn">View All Jobs</a>
+        </div>
+    </div>
+</section>
+

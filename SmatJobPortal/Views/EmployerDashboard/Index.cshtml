@@ -1,0 +1,137 @@
+﻿@model EmployerDashboardModel
+<section class="dashboard-section">
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Employer Dashboard</h1>
+            <a asp-controller="EmployerDashboard" asp-action="AddJob" class="btn">Post a New Job</a>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>@Model.ActiveJobs</h3>
+                    <p>Active Jobs</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>@Model.Applications</h3>
+                    <p>Applications</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>@Model.ProfileViews</h3>
+                    <p>Profile Views</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-main">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Recent Applications</h2>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="applications-list">
+                        <div class="application">
+                            <div class="application-info">
+                                <h3>Frontend Developer Position</h3>
+                                <p><strong>Applicant:</strong> Sarah Johnson</p>
+                                <p><strong>Applied:</strong> 2 days ago</p>
+                            </div>
+                            <div class="application-status pending">Pending Review</div>
+                            <div class="application-actions">
+                                <a href="#" class="btn btn-small">View</a>
+                            </div>
+                        </div>
+                        <div class="application">
+                            <div class="application-info">
+                                <h3>UX Designer Position</h3>
+                                <p><strong>Applicant:</strong> Michael Brown</p>
+                                <p><strong>Applied:</strong> 1 week ago</p>
+                            </div>
+                            <div class="application-status reviewed">Reviewed</div>
+                            <div class="application-actions">
+                                <a href="#" class="btn btn-small">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Your Job Postings</h2>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="jobs-list">
+                        @foreach (var item in Model.YourJobPostings)
+
+                        {
+                            <div class="job-item">
+                                <div class="job-info">
+                                    <h3>@item.JobTitle</h3>
+                                    <p><i class="fas fa-map-marker-alt"></i>@item.JobLocation</p>
+                                    <p><i class="fas fa-clock"></i> Posted @(Math.Round((DateTime.Now-item.AddedTime).TotalDays)) days ago</p>
+                                </div>
+                                <div class="job-stats">
+                                    <span>12 Applications</span>
+                                </div>
+                                <div class="job-actions">
+                                    <a href="../dashboard/employer-edit-job.html"
+                                    class="btn btn-small">Edit</a>
+                                    <a href="#" class="btn btn-small btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-sidebar">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Quick Actions</h2>
+                    </div>
+                    <div class="quick-actions">
+                        <a href="../dashboard/employer-add-job.html"
+                           class="btn btn-block">
+                            <i class="fas fa-plus"></i> Post a New Job
+                        </a>
+                        <a href="../dashboard/employer-view-applications.html"
+                           class="btn btn-block">
+                            <i class="fas fa-users"></i> View Applicants
+                        </a>
+                        <a href="#" class="btn btn-block">
+                            <i class="fas fa-building"></i> Company Profile
+                        </a>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Profile Completeness</h2>
+                    </div>
+                    <div class="profile-completeness">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
+                        <p>75% complete</p>
+                        <a href="#" class="btn btn-small btn-block">Complete Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmatJobPortal.Data;
 
@@ -11,9 +12,11 @@ using SmatJobPortal.Data;
 namespace SmatJobPortal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250902072805_job added to db")]
+    partial class jobaddedtodb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,19 +239,12 @@ namespace SmatJobPortal.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("AddedTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("ApplicationDeadline")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Benefits")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployerUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("JobCategory")
                         .IsRequired()
@@ -279,8 +275,6 @@ namespace SmatJobPortal.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployerUserId");
 
                     b.ToTable("Jobs");
                 });
@@ -334,17 +328,6 @@ namespace SmatJobPortal.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SmatJobPortal.Data.Job", b =>
-                {
-                    b.HasOne("SmatJobPortal.Data.ApplicationUser", "EmployerUser")
-                        .WithMany()
-                        .HasForeignKey("EmployerUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EmployerUser");
                 });
 #pragma warning restore 612, 618
         }

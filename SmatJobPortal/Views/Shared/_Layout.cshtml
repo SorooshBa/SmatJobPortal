@@ -32,7 +32,12 @@
                                 <i class="fas fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="employer.html" class="active">Dashboard</a></li>
+                                @if (User.IsInRole("Employer"))
+                                {
+                                    <li><a asp-controller="EmployerDashboard" asp-action="Index" class="active">Dashboard</a></li>
+                                }
+                                
+
                                 <li><a href="#">Profile</a></li>
                                 <li><a href="#">Settings</a></li>
                                 <li>

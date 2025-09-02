@@ -1,0 +1,111 @@
+﻿@model SmatJobPortal.Data.Job
+
+<section class="dashboard-section">
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Post a New Job</h1>
+            <a href="employer.html" class="btn">Back to Dashboard</a>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-main">
+                <div class="dashboard-card">
+                    <form id="jobPostForm" method="post">
+                        <div class="form-group">
+                            <label for="jobTitle">Job Title*</label>
+                            <input asp-for="JobTitle" type="text" id="jobTitle"  required placeholder="e.g. Senior Frontend Developer">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jobType">Job Type*</label>
+                                <select id="jobType" asp-for="JobType" required>
+                                    <option value="">Select Job Type</option>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="internship">Internship</option>
+                                    <option value="remote">Remote</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobCategory">Category*</label>
+                                <select id="jobCategory" asp-for="JobCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="software">Software Development</option>
+                                    <option value="design">Design</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="business">Business</option>
+                                    <option value="customer-service">Customer Service</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jobLocation">Location*</label>
+                                <input type="text" id="jobLocation" asp-for="JobLocation" required placeholder="e.g. New York, NY or Remote">
+                            </div>
+                            <div class="form-group">
+                                <label for="jobSalary">Salary Range</label>
+                                <input type="text" id="jobSalary" asp-for="SalaryRange" placeholder="e.g. $80,000 - $100,000">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description*</label>
+                            <textarea id="jobDescription" asp-for="JobDescription" rows="8" required placeholder="Detailed description of the job responsibilities and requirements"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobRequirements">Requirements*</label>
+                            <textarea id="jobRequirements" asp-for="Requirements" rows="6" required placeholder="List the skills and qualifications required"></textarea>
+                            <small>Separate requirements with bullet points or numbers</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobBenefits">Benefits (Optional)</label>
+                            <textarea id="jobBenefits" asp-for="Benefits" rows="4" placeholder="List any benefits you offer"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="applicationDeadline">Application Deadline</label>
+                            <input type="date" id="applicationDeadline" asp-for="ApplicationDeadline">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Post Job</button>
+                            <button type="button" class="btn btn-cancel">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="dashboard-sidebar">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Tips for Posting</h2>
+                    </div>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Be specific about the job title and responsibilities</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Clearly list required skills and qualifications</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Highlight your company culture and benefits</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Use bullet points for better readability</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

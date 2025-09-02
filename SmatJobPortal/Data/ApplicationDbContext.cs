@@ -9,5 +9,6 @@ namespace SmatJobPortal.Data
             : base(options)
         {
         }
+        public DbSet<Job> Jobs { get; set; }
     }
 }
