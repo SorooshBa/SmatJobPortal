@@ -21,7 +21,7 @@
                     <h1>Smart<span>Jobs</span></h1>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
+                    <li><a asp-action="Index" asp-controller="Home">Home</a></li>
                     <li><a href="../jobs/list.html">Browse Jobs</a></li>
 
                     @if (SignInManager.IsSignedIn(User))

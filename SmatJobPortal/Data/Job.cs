@@ -22,7 +22,8 @@ namespace SmatJobPortal.Data
 
         public DateTime ApplicationDeadline { get; set; }
 
-        [Required]
+
+        public string EmployerUserId { get; set; }
         public ApplicationUser EmployerUser { get; set; }
 
         

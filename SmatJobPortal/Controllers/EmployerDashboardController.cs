@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmatJobPortal.Data;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmatJobPortal.Controllers
 {
+    [Authorize(Roles = "Employer")]
     public class EmployerDashboardController(UserManager<ApplicationUser> _user,ApplicationDbContext _db) : Controller
     {
         public IActionResult Index()
@@ -29,6 +31,16 @@ namespace SmatJobPortal.Controllers
             job.EmployerUser = await _user.GetUserAsync(User);
             _db.Add(job);
             await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        public IActionResult DeleteJob(int id)
+        {
+            var job = _db.Jobs.Where(x => x.Id == id).FirstOrDefault();
+            if (job.EmployerUserId == _user.GetUserId(User))
+            {
+                _db.Remove(job);
+                _db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }
