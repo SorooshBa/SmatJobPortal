@@ -1,0 +1,63 @@
+﻿@model SmatJobPortal.Data.Job
+<section class="job-detail-section">
+    <div class="container">
+        <div class="job-detail-container">
+            <div class="job-detail-main">
+                <div class="job-header">
+                    <h1>@Model.JobTitle</h1>
+                    <p class="company">@Model.EmployerUser.FullName</p>
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i>@Model.JobLocation</span>
+                        <span><i class="fas fa-dollar-sign"></i>@Model.SalaryRange</span>
+                        <span><i class="fas fa-briefcase"></i>@Model.JobType</span>
+                        <span><i class="far fa-clock"></i> Posted Less Than @((DateTime.Now-Model.AddedTime).Days+1) days ago</span>
+                    </div>
+                </div>
+
+                <div class="job-content">
+                    <h2>Job Description</h2>
+                    <p>@Model.JobDescription</p>
+
+                    <h3>Requirements</h3>
+                    <ul>
+                        @foreach (var a in Model.Requirements.Split("\n"))
+                        {
+                            <li>@a</li>
+                        }
+                    </ul>
+
+                    <h3>Benefits</h3>
+                    <ul>
+                        @foreach (var a in Model.Benefits.Split("\n"))
+                        {
+                            <li>@a</li>
+                        }
+                    </ul>
+                </div>
+
+                <div class="job-actions">
+                    <a href="apply.html" class="btn btn-apply">Apply Now</a>
+                    <button class="btn btn-save"><i class="far fa-bookmark"></i> Save Job</button>
+                </div>
+            </div>
+
+          
+                <div class="similar-jobs">
+                    <h3>Similar Jobs</h3>
+                    <div class="similar-job">
+                        <h4>UI/UX Designer</h4>
+                        <p>Creative Minds</p>
+                        <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <a href="#">View Job</a>
+                    </div>
+                    <div class="similar-job">
+                        <h4>JavaScript Developer</h4>
+                        <p>Web Solutions Co.</p>
+                        <span><i class="fas fa-map-marker-alt"></i> Boston, MA</span>
+                        <a href="#">View Job</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

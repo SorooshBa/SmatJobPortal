@@ -80,7 +80,7 @@
                         {
                             <div class="job-item">
                                 <div class="job-info">
-                                    <h3>@item.JobTitle</h3>
+                                    <a asp-controller="Job" asp-action="Index" asp-route-id="@item.Id"><h3>@item.JobTitle</h3></a>
                                     <p><i class="fas fa-map-marker-alt"></i>@item.JobLocation</p>
                                     <p><i class="fas fa-clock"></i> Posted Less Than @(Math.Round((DateTime.Now-item.AddedTime).TotalDays)+1) days ago</p>
                                 </div>
