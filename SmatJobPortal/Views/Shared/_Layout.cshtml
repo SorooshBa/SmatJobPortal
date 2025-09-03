@@ -22,7 +22,7 @@
                 </div>
                 <ul class="nav-links">
                     <li><a asp-action="Index" asp-controller="Home">Home</a></li>
-                    <li><a href="../jobs/list.html">Browse Jobs</a></li>
+                    <li><a asp-action="ListJob" asp-controller="Job">Browse Jobs</a></li>
 
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -36,8 +36,11 @@
                                 {
                                     <li><a asp-controller="EmployerDashboard" asp-action="Index" class="active">Dashboard</a></li>
                                 }
-                                
 
+                                @if (User.IsInRole("JobSeeker"))
+                                {
+                                    <li><a asp-controller="SeekerDashboard" asp-action="Index" class="active">Dashboard</a></li>
+                                }
                                 <li><a href="#">Profile</a></li>
                                 <li><a href="#">Settings</a></li>
                                 <li>

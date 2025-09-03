@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SmatJobPortal.Data.Migrations;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmatJobPortal.Data
 {
@@ -30,6 +31,8 @@ namespace SmatJobPortal.Data
         public DateTime AddedTime { get; set; }=DateTime.Now;
 
         public JobStatus Status { get; set; } = JobStatus.Active;
+
+        public ICollection<JobApply> JobApplies { get; set; }
 
     }
     public enum JobStatus

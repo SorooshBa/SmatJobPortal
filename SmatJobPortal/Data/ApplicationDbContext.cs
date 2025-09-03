@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SmatJobPortal.Data.Migrations;
 
 namespace SmatJobPortal.Data
 {
@@ -10,5 +11,25 @@ namespace SmatJobPortal.Data
         {
         }
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<JobApply> JobApply { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // رابطه JobApply -> Job
+            builder.Entity<JobApply>()
+                .HasOne(ja => ja.Job)
+                .WithMany(j => j.JobApplies)
+                .HasForeignKey(ja => ja.JobId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // رابطه JobApply -> ApplicationUser
+            builder.Entity<JobApply>()
+                .HasOne(ja => ja.User)
+                .WithMany(u => u.JobApplies)
+                .HasForeignKey(ja => ja.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }
+

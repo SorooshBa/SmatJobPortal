@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SmatJobPortal.Data;
+using SmatJobPortal.Models;
 using System.Threading.Tasks;
 
 namespace SmatJobPortal.Controllers
@@ -18,6 +19,15 @@ namespace SmatJobPortal.Controllers
                 return View(model);
             }
             return NotFound();
+        }
+        public async Task<IActionResult> ListJob()
+        {
+            var model = new ListJobModel();
+            model.Jobs = _db.Jobs.OrderByDescending(x => x.AddedTime).ToList();
+            foreach (var job in model.Jobs) {
+                job.EmployerUser=await _user.FindByIdAsync(job.EmployerUserId);
+            }
+            return View(model);
         }
     }
 }

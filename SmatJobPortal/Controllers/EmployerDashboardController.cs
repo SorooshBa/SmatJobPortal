@@ -15,7 +15,7 @@ namespace SmatJobPortal.Controllers
         {
             EmployerDashboardModel model = new EmployerDashboardModel();
             model.ActiveJobs = _db.Jobs.Count(j => j.EmployerUser.Id == _user.GetUserId(User) && j.ApplicationDeadline > DateTime.Now);
-            model.YourJobPostings = _db.Jobs.Where(j => j.EmployerUser.Id == _user.GetUserId(User) && j.ApplicationDeadline > DateTime.Now).ToList();
+            model.YourJobPostings = _db.Jobs.Where(j => j.EmployerUser.Id == _user.GetUserId(User) && j.ApplicationDeadline > DateTime.Now).OrderByDescending(x=>x.AddedTime).ToList();
             model.Applications = 0;
             model.ProfileViews = 0;
             return View(model);

@@ -1,0 +1,81 @@
+﻿@model ListJobModel
+<section class="job-search">
+    <div class="container">
+        <div class="search-filters">
+            <h2>Find Your Perfect Job</h2>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <input type="text" placeholder="Job title, keywords">
+                </div>
+                <div class="filter-group">
+                    <input type="text" placeholder="Location">
+                </div>
+                <div class="filter-group">
+                    <select>
+                        <option value="">All Categories</option>
+                        <option value="software">Software Development</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="education">Education</option>
+                    </select>
+                </div>
+                <button class="btn">Search</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="job-listings">
+    <div class="container">
+        <div class="listings-header">
+            <h3>Showing <span id="jobCount">24</span> Jobs</h3>
+            <div class="sort-by">
+                <span>Sort by:</span>
+                <select id="sortJobs">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="salary-high">Salary (High to Low)</option>
+                    <option value="salary-low">Salary (Low to High)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="job-list" id="jobList">
+            @foreach(var item in Model.Jobs)
+            {
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <div>
+                            <a asp-action="Index" asp-controller="Job" asp-route-id="@item.Id"><h3 class="job-title">@item.JobTitle</h3></a>
+                            <p class="job-company">@item.EmployerUser.FullName</p>
+                        </div>
+                        <div>
+                            <span class="job-type"><i class="fas fa-briefcase"></i>@item.JobType</span>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <p class="job-location"><i class="fas fa-map-marker-alt"></i>@item.JobLocation</p>
+                        <p class="job-salary"><i class="fas fa-dollar-sign"></i>@item.SalaryRange</p>
+                    </div>
+                    <p class="job-description">@item.JobDescription</p>
+                    <div class="job-footer">
+                        <span class="job-posted"><i class="far fa-clock"></i> Posted Less Than @((DateTime.Now-item.AddedTime).Days+1) days ago</span>
+                        <a asp-action="Index" asp-controller="Job" asp-route-id="@item.Id" class="btn">View Details</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="pagination">
+            <button class="btn-prev" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+            <div class="page-numbers">
+                <span class="active">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>...</span>
+                <span>10</span>
+            </div>
+            <button class="btn-next">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
