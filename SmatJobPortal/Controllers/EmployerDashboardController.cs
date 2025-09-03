@@ -43,5 +43,10 @@ namespace SmatJobPortal.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult EditJob(int id)
+        {           
+            return View(_db.Jobs.Where(x=>x.Id==id).FirstOrDefault());
+        }
     }
 }

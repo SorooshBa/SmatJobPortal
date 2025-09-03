@@ -88,7 +88,7 @@
                                     <span>12 Applications</span>
                                 </div>
                                 <div class="job-actions">
-                                    <a href="../dashboard/employer-edit-job.html"
+                                    <a asp-action="EditJob" asp-route-id="@item.Id"
                                     class="btn btn-small">Edit</a>
                                     <a asp-controller="EmployerDashboard" asp-action="DeleteJob" asp-route-id="@item.Id" class="btn btn-small btn-danger">Delete</a>
                                 </div>
@@ -105,7 +105,7 @@
                         <h2>Quick Actions</h2>
                     </div>
                     <div class="quick-actions">
-                        <a href="../dashboard/employer-add-job.html"
+                        <a asp-controller="EmployerDashboard" asp-action="AddJob"
                            class="btn btn-block">
                             <i class="fas fa-plus"></i> Post a New Job
                         </a>

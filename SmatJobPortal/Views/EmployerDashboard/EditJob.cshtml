@@ -1,0 +1,144 @@
+﻿@model SmatJobPortal.Data.Job
+
+<section class="dashboard-section">
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Edit Job Post</h1>
+            <div class="header-actions">
+                <a asp-action="DeleteJob" asp-route-id="@Model.Id" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Delete Job
+                </a>
+                <a asp-action="Index" class="btn">Back to Dashboard</a>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-main">
+                <div class="dashboard-card">
+                    <form id="editJobForm">
+                        <div class="form-group">
+                            <label for="jobTitle">Job Title*</label>
+                            <input type="text" id="jobTitle" asp-for="JobTitle" required >
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jobType">Job Type*</label>
+                                <select asp-for="JobType" id="jobType"  required>
+                                    <option value="">Select Job Type</option>
+                                    <option value="full-time" selected>Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="internship">Internship</option>
+                                    <option value="remote">Remote</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobCategory">Category*</label>
+                                <select asp-for="JobCategory" id="jobCategory"  required>
+                                    <option value="">Select Category</option>
+                                    <option value="software" selected>Software Development</option>
+                                    <option value="design">Design</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="business">Business</option>
+                                    <option value="customer-service">Customer Service</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jobLocation">Location*</label>
+                                <input type="text" id="jobLocation" asp-for="JobLocation" required value="New York, NY">
+                            </div>
+                            <div class="form-group">
+                                <label for="jobSalary">Salary Range</label>
+                                <input type="text" id="jobSalary" asp-for="SalaryRange" value="$80,000 - $100,000">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Job Status</label>
+                            <div class="status-toggle">
+                                <input type="radio" id="statusActive" name="jobStatus" value="active" checked>
+                                <label for="statusActive">Active</label>
+                                <input type="radio" id="statusPaused" name="jobStatus" value="paused">
+                                <label for="statusPaused">Paused</label>
+                                <input type="radio" id="statusClosed" name="jobStatus" value="closed">
+                                <label for="statusClosed">Closed</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description*</label>
+                            <textarea id="jobDescription" asp-for="JobDescription" rows="8" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobRequirements">Requirements*</label>
+                            <textarea asp-for="Requirements"  rows="6" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobBenefits">Benefits (Optional)</label>
+                            <textarea id="jobBenefits"  asp-for="Benefits" rows="4"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="applicationDeadline">Application Deadline</label>
+                            <input type="date" id="applicationDeadline" asp-for="ApplicationDeadline" value="2023-12-31">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Update Job</button>
+                            <button type="button" class="btn btn-cancel">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="dashboard-sidebar">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Job Statistics</h2>
+                    </div>
+                    <div class="job-stats">
+                        <div class="stat-item">
+                            <span>Views</span>
+                            <span class="stat-value">1,245</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Applications</span>
+                            <span class="stat-value">24</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Avg. Application Rate</span>
+                            <span class="stat-value">1.9%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Posted On</span>
+                            <span class="stat-value">@Model.AddedTime.ToShortDateString()</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Quick Actions</h2>
+                    </div>
+                    <div class="quick-actions">
+                        <a href="employer-view-applications.html" class="btn btn-block">
+                            <i class="fas fa-users"></i> View Applicants (24)
+                        </a>
+                        <button class="btn btn-block">
+                            <i class="fas fa-share-alt"></i> Share Job
+                        </button>
+                        <button class="btn btn-block btn-danger">
+                            <i class="fas fa-trash"></i> Delete Job
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
