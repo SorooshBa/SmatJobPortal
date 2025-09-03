@@ -1,4 +1,5 @@
-﻿<section class="dashboard-section">
+﻿@model SeekerDashboardModel
+<section class="dashboard-section">
     <div class="container">
         <div class="dashboard-header">
             <h1>Job Seeker Dashboard</h1>
@@ -70,34 +71,24 @@
 
                 <div class="dashboard-card">
                     <div class="card-header">
-                        <h2>Recommended Jobs</h2>
+                        <h2>Latest Jobs</h2>
                         <a href="../jobs/list.html" class="view-all">View All</a>
                     </div>
                     <div class="jobs-list">
-                        <div class="job-item">
-                            <div class="job-info">
-                                <h3>JavaScript Developer</h3>
-                                <p>Web Solutions Co.</p>
-                                <p><i class="fas fa-map-marker-alt"></i> Boston, MA</p>
-                                <p><i class="fas fa-clock"></i> Posted 3 days ago</p>
+                        @foreach (var item in Model.JobList)
+                        {
+                            <div class="job-item">
+                                <div class="job-info">
+                                    <h3>@item.JobTitle</h3>
+                                    <p><i class="fas fa-map-marker-alt"></i>@item.JobLocation</p>
+                                    <p><i class="fas fa-clock"></i> Posted Less Than @(Math.Round((DateTime.Now - item.AddedTime).TotalDays) + 1) days ago</p>
+                                </div>
+                                <div class="job-actions">
+                                    <a asp-controller="Job" asp-action="Index" asp-route-id="@item.Id" class="btn btn-small">View</a>
+                                    <a href="../jobs/apply.html" class="btn btn-small">Apply</a>
+                                </div>
                             </div>
-                            <div class="job-actions">
-                                <a href="../jobs/detail.html" class="btn btn-small">View</a>
-                                <a href="../jobs/apply.html" class="btn btn-small">Apply</a>
-                            </div>
-                        </div>
-                        <div class="job-item">
-                            <div class="job-info">
-                                <h3>UI/UX Designer</h3>
-                                <p>Digital Creations</p>
-                                <p><i class="fas fa-map-marker-alt"></i> Remote</p>
-                                <p><i class="fas fa-clock"></i> Posted 1 day ago</p>
-                            </div>
-                            <div class="job-actions">
-                                <a href="../jobs/detail.html" class="btn btn-small">View</a>
-                                <a href="../jobs/apply.html" class="btn btn-small">Apply</a>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
