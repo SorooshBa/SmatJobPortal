@@ -15,7 +15,7 @@
         <div class="dashboard-content">
             <div class="dashboard-main">
                 <div class="dashboard-card">
-                    <form id="editJobForm">
+                    <form id="editJobForm" method="post">
                         <div class="form-group">
                             <label for="jobTitle">Job Title*</label>
                             <input type="text" id="jobTitle" asp-for="JobTitle" required >
@@ -49,22 +49,22 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="jobLocation">Location*</label>
-                                <input type="text" id="jobLocation" asp-for="JobLocation" required value="New York, NY">
+                                <input type="text" id="jobLocation" asp-for="JobLocation" required >
                             </div>
                             <div class="form-group">
                                 <label for="jobSalary">Salary Range</label>
-                                <input type="text" id="jobSalary" asp-for="SalaryRange" value="$80,000 - $100,000">
+                                <input type="text" id="jobSalary" asp-for="SalaryRange" >
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Job Status</label>
                             <div class="status-toggle">
-                                <input type="radio" id="statusActive" name="jobStatus" value="active" checked>
+                                <input type="radio" id="statusActive"  value="active" asp-for="Status">
                                 <label for="statusActive">Active</label>
-                                <input type="radio" id="statusPaused" name="jobStatus" value="paused">
+                                <input type="radio" id="statusPaused"  value="paused" asp-for="Status">
                                 <label for="statusPaused">Paused</label>
-                                <input type="radio" id="statusClosed" name="jobStatus" value="closed">
+                                <input type="radio" id="statusClosed"  value="closed" asp-for="Status">
                                 <label for="statusClosed">Closed</label>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
 
                         <div class="form-group">
                             <label for="applicationDeadline">Application Deadline</label>
-                            <input type="date" id="applicationDeadline" asp-for="ApplicationDeadline" value="2023-12-31">
+                            <input type="date" id="applicationDeadline" asp-for="ApplicationDeadline" >
                         </div>
 
                         <div class="form-actions">
@@ -133,9 +133,9 @@
                         <button class="btn btn-block">
                             <i class="fas fa-share-alt"></i> Share Job
                         </button>
-                        <button class="btn btn-block btn-danger">
+                        <a asp-action="DeleteJob" asp-route-id="@Model.Id" class="btn btn-block btn-danger">
                             <i class="fas fa-trash"></i> Delete Job
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

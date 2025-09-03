@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SmatJobPortal.Controllers
 {
     [Authorize(Roles = "Employer")]
-    public class EmployerDashboardController(UserManager<ApplicationUser> _user,ApplicationDbContext _db) : Controller
+    public class EmployerDashboardController(UserManager<ApplicationUser> _user, ApplicationDbContext _db) : Controller
     {
         public IActionResult Index()
         {
@@ -45,8 +45,34 @@ namespace SmatJobPortal.Controllers
         }
 
         public IActionResult EditJob(int id)
-        {           
-            return View(_db.Jobs.Where(x=>x.Id==id).FirstOrDefault());
+        {
+            var model = _db.Jobs.Where(x => x.Id == id).FirstOrDefault();
+            if (model.EmployerUserId == _user.GetUserId(User))
+                return View(model);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult EditJob(Job job)
+        {
+            var DbJob = _db.Jobs.Where(x => x.Id == job.Id).FirstOrDefault();
+            if (DbJob == null&& DbJob.EmployerUserId != _user.GetUserId(User))
+            {
+                return Forbid();
+            }
+            DbJob.ApplicationDeadline = job.ApplicationDeadline;
+            DbJob.Benefits = job.Benefits;
+            DbJob.JobCategory = job.JobCategory;
+            DbJob.JobDescription = job.JobDescription;
+            DbJob.JobLocation = job.JobLocation;
+            DbJob.JobTitle = job.JobTitle;
+            DbJob.JobType = job.JobType;
+            DbJob.Requirements = job.Requirements;
+            DbJob.SalaryRange = job.SalaryRange;
+            DbJob.Status = job.Status;
+            _db.Update(DbJob);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

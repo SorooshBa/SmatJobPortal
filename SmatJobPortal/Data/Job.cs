@@ -28,6 +28,15 @@ namespace SmatJobPortal.Data
 
         
         public DateTime AddedTime { get; set; }=DateTime.Now;
+
+        public JobStatus Status { get; set; } = JobStatus.Active;
+
+    }
+    public enum JobStatus
+    {
+        Active,
+        Paused,
+        Closed
     }
   
 }
