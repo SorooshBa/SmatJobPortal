@@ -18,7 +18,7 @@ namespace SmatJobPortal.Controllers
             model.JobList=_db.Jobs.OrderByDescending(x=>x.AddedTime).Take(3).ToList();
             model.JobApplyList = _db.JobApply.Where(x=>x.UserId==_user.GetUserAsync(User).Result.Id).OrderByDescending(x=>x.AppliedAt).Take(3).ToList();
             model.Applications = model.JobApplyList.Count;
-            model.ProfileViews = _db.ProfileViews.Count(p => p.ViewedUserId == _user.GetUserAsync(User).Result.Id);
+            model.ProfileViews = 0;
             return View(model);
         }
         public IActionResult Apply(int id)
