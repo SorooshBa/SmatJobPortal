@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="job-actions">
-                    <a href="apply.html" class="btn btn-apply">Apply Now</a>
+                    <a asp-controller="SeekerDashboard" asp-action="Apply" asp-route-id="@Model.Id" class="btn btn-apply">Apply Now</a>
                     <button class="btn btn-save"><i class="far fa-bookmark"></i> Save Job</button>
                 </div>
             </div>

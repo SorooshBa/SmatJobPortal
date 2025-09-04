@@ -1,5 +1,4 @@
-﻿using SmatJobPortal.Data.Migrations;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SmatJobPortal.Data
 {
@@ -33,6 +32,8 @@ namespace SmatJobPortal.Data
         public JobStatus Status { get; set; } = JobStatus.Active;
 
         public ICollection<JobApply> JobApplies { get; set; }
+
+        public bool IsApproved { get; set; } = false;
 
     }
     public enum JobStatus

@@ -1,0 +1,55 @@
+﻿@model SmatJobPortal.Data.JobApply
+<section class="apply-section">
+    <div class="container">
+        <div class="apply-container">
+            <div class="apply-header">
+                <h1>Apply for <span>@Model.Job.JobTitle</span></h1>
+                <p>at @Model.Job.JobLocation</p>
+            </div>
+
+            <form class="apply-form" method="post" id="jobApplicationForm" enctype="multipart/form-data">
+                <input type="hidden" asp-for="JobId" />
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" asp-for="FullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" asp-for="Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" asp-for="PhoneNumber" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="resume">Resume/CV</label>
+                    <div class="file-upload">
+                        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                        <label for="resume" class="file-upload-label">
+                            <i class="fas fa-upload"></i> Choose File
+                            <span class="file-name">No file chosen</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="coverLetter">Cover Letter</label>
+                    <textarea id="coverLetter" asp-for="CoverLetter" rows="6" placeholder="Tell us why you're a good fit for this position..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="portfolio">Portfolio/LinkedIn (Optional)</label>
+                    <input type="url" id="portfolio" asp-for="Portfolio" placeholder="https://">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-apply">Submit Application</button>
+                    <a href="detail.html" class="btn btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

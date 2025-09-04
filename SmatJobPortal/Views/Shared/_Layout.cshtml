@@ -26,12 +26,24 @@
 
                     @if (SignInManager.IsSignedIn(User))
                     {
+                        <li class="notif">
+                            <a href="#" id="notifBell" title="Notifications"><i class="fas fa-bell"></i></a>
+                            <div id="notifDropdown" class="notif-dropdown" style="display:none;">
+                                <div class="notif-header">Notifications</div>
+                                <div id="notifList" class="notif-list"></div>
+                                <div class="notif-footer"><a asp-controller="EmployerDashboard" asp-action="ViewApplications">View applications</a></div>
+                            </div>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle">
                                 <i class="fas fa-user-circle"></i> @User.Identity?.Name
                                 <i class="fas fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a asp-controller="Admin" asp-action="PendingJobs">Admin: Pending Jobs</a></li>
+                                }
                                 @if (User.IsInRole("Employer"))
                                 {
                                     <li><a asp-controller="EmployerDashboard" asp-action="Index" class="active">Dashboard</a></li>
@@ -94,6 +106,45 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        (function(){
+            const bell = document.getElementById('notifBell');
+            const dropdown = document.getElementById('notifDropdown');
+            const list = document.getElementById('notifList');
+            if(bell && dropdown){
+                bell.addEventListener('click', function(e){
+                    e.preventDefault();
+                    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+                });
+                document.addEventListener('click', function(e){
+                    if(!dropdown.contains(e.target) && e.target !== bell){
+                        dropdown.style.display = 'none';
+                    }
+                });
+            }
+
+            function addNotif(text){
+                if(!list) return;
+                const item = document.createElement('div');
+                item.className = 'notif-item';
+                item.textContent = text;
+                list.prepend(item);
+            }
+
+            if (window.signalR === undefined && window.signalr === undefined) return;
+            try{
+                const connection = new signalR.HubConnectionBuilder().withUrl('/hubs/notifications').withAutomaticReconnect().build();
+                connection.on('jobApplicationCreated', function(data){
+                    addNotif('New application received for Job #' + data.jobId + ' from ' + data.applicant);
+                });
+                connection.on('applicationAccepted', function(data){
+                    addNotif('Your application for Job #' + data.jobId + ' was accepted');
+                });
+                connection.start().catch(function(err){ console.warn(err); });
+            }catch(err){ console.warn(err); }
+        })();
+    </script>
     <script src="../js/auth.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

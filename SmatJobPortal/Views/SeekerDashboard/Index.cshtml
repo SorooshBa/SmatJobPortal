@@ -12,7 +12,7 @@
                     <i class="fas fa-file-alt"></i>
                 </div>
                 <div class="stat-content">
-                    <h3>5</h3>
+                    <h3>@Model.Applications</h3>
                     <p>Applications</p>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                     <i class="fas fa-eye"></i>
                 </div>
                 <div class="stat-content">
-                    <h3>24</h3>
+                    <h3>@Model.ProfileViews</h3>
                     <p>Profile Views</p>
                 </div>
             </div>
@@ -44,28 +44,24 @@
                         <a href="#" class="view-all">View All</a>
                     </div>
                     <div class="applications-list">
-                        <div class="application">
-                            <div class="application-info">
-                                <h3>Frontend Developer at Tech Solutions Inc.</h3>
-                                <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
-                                <p><strong>Applied:</strong> 2 days ago</p>
+                        @foreach (var item in Model.JobApplyList)
+                        {
+                            <div class="application">
+                                <div class="application-info">
+                                    <h3>@item.Job.JobTitle</h3>
+                                    <p><strong>Status:</strong> <span class="status @(item.Status==SmatJobPortal.Data.JobApplyStatus.Accepted?"reviewed":"pending")">@item.Status</span></p>
+                                    <p><strong>Applied:</strong> @(Math.Round((DateTime.Now-item.AppliedAt).TotalDays+1)) days ago</p>
+                                </div>
+                                <div class="application-actions">
+                                    <a asp-controller="SeekerDashboard" asp-action="Application" asp-route-id="@item.Id" class="btn btn-small">View</a>
+                                    <form asp-controller="SeekerDashboard" asp-action="Withdraw" method="post" style="display:inline">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-small btn-danger">Withdraw</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="application-actions">
-                                <a href="#" class="btn btn-small">View</a>
-                                <a href="#" class="btn btn-small btn-danger">Withdraw</a>
-                            </div>
-                        </div>
-                        <div class="application">
-                            <div class="application-info">
-                                <h3>UX Designer at Creative Minds</h3>
-                                <p><strong>Status:</strong> <span class="status reviewed">Under Review</span></p>
-                                <p><strong>Applied:</strong> 1 week ago</p>
-                            </div>
-                            <div class="application-actions">
-                                <a href="#" class="btn btn-small">View</a>
-                                <a href="#" class="btn btn-small btn-danger">Withdraw</a>
-                            </div>
-                        </div>
+                        }
+
                     </div>
                 </div>
 
@@ -85,7 +81,7 @@
                                 </div>
                                 <div class="job-actions">
                                     <a asp-controller="Job" asp-action="Index" asp-route-id="@item.Id" class="btn btn-small">View</a>
-                                    <a href="../jobs/apply.html" class="btn btn-small">Apply</a>
+                                    <a asp-controller="SeekerDashboard" asp-action="Apply" asp-route-id="@item.Id" class="btn btn-small">Apply</a>
                                 </div>
                             </div>
                         }

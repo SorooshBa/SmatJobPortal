@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Job Post - Smart Job Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>Smart<span>Jobs</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../jobs/list.html">Browse Jobs</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fas fa-user-circle"></i> John Doe <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="employer.html">Dashboard</a></li>
+                            <li><a href="employer-add-job.html">Post New Job</a></li>
+                            <li><a href="employer-view-applications.html">View Applications</a></li>
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="../auth/login.html">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="burger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Edit Job Post</h1>
+                <div class="header-actions">
+                    <button class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Delete Job
+                    </button>
+                    <a href="employer.html" class="btn">Back to Dashboard</a>
+                </div>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="dashboard-main">
+                    <div class="dashboard-card">
+                        <form id="editJobForm">
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title*</label>
+                                <input type="text" id="jobTitle" name="jobTitle" required value="Frontend Developer">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="jobType">Job Type*</label>
+                                    <select id="jobType" name="jobType" required>
+                                        <option value="">Select Job Type</option>
+                                        <option value="full-time" selected>Full-time</option>
+                                        <option value="part-time">Part-time</option>
+                                        <option value="contract">Contract</option>
+                                        <option value="internship">Internship</option>
+                                        <option value="remote">Remote</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jobCategory">Category*</label>
+                                    <select id="jobCategory" name="jobCategory" required>
+                                        <option value="">Select Category</option>
+                                        <option value="software" selected>Software Development</option>
+                                        <option value="design">Design</option>
+                                        <option value="marketing">Marketing</option>
+                                        <option value="business">Business</option>
+                                        <option value="customer-service">Customer Service</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="jobLocation">Location*</label>
+                                    <input type="text" id="jobLocation" name="jobLocation" required value="New York, NY">
+                                </div>
+                                <div class="form-group">
+                                    <label for="jobSalary">Salary Range</label>
+                                    <input type="text" id="jobSalary" name="jobSalary" value="$80,000 - $100,000">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Job Status</label>
+                                <div class="status-toggle">
+                                    <input type="radio" id="statusActive" name="jobStatus" value="active" checked>
+                                    <label for="statusActive">Active</label>
+                                    <input type="radio" id="statusPaused" name="jobStatus" value="paused">
+                                    <label for="statusPaused">Paused</label>
+                                    <input type="radio" id="statusClosed" name="jobStatus" value="closed">
+                                    <label for="statusClosed">Closed</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobDescription">Job Description*</label>
+                                <textarea id="jobDescription" name="jobDescription" rows="8" required>We are looking for a skilled Frontend Developer to join our team. You will be responsible for building user interfaces and implementing design systems.</textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobRequirements">Requirements*</label>
+                                <textarea id="jobRequirements" name="jobRequirements" rows="6" required>- 3+ years of experience with HTML, CSS, and JavaScript
+- Proficient understanding of React.js or similar frameworks
+- Experience with responsive and adaptive design
+- Good understanding of SEO principles
+- Proficient understanding of code versioning tools, such as Git</textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobBenefits">Benefits (Optional)</label>
+                                <textarea id="jobBenefits" name="jobBenefits" rows="4">- Competitive salary
+- Health insurance
+- Flexible work hours
+- Remote work options
+- Professional development budget</textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="applicationDeadline">Application Deadline</label>
+                                <input type="date" id="applicationDeadline" name="applicationDeadline" value="2023-12-31">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Update Job</button>
+                                <button type="button" class="btn btn-cancel">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="dashboard-sidebar">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2>Job Statistics</h2>
+                        </div>
+                        <div class="job-stats">
+                            <div class="stat-item">
+                                <span>Views</span>
+                                <span class="stat-value">1,245</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Applications</span>
+                                <span class="stat-value">24</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Avg. Application Rate</span>
+                                <span class="stat-value">1.9%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Posted On</span>
+                                <span class="stat-value">Oct 15, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2>Quick Actions</h2>
+                        </div>
+                        <div class="quick-actions">
+                            <a href="employer-view-applications.html" class="btn btn-block">
+                                <i class="fas fa-users"></i> View Applicants (24)
+                            </a>
+                            <button class="btn btn-block">
+                                <i class="fas fa-share-alt"></i> Share Job
+                            </button>
+                            <button class="btn btn-block btn-danger">
+                                <i class="fas fa-trash"></i> Delete Job
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>Smart Job Portal connects job seekers with employers efficiently and effectively.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../jobs/list.html">Browse Jobs</a></li>
+                        <li><a href="../auth/login.html">Login</a></li>
+                        <li><a href="../auth/register.html">Register</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@smartjobportal.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Smart Job Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('editJobForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Job updated successfully!');
+            window.location.href = 'employer.html';
+        });
+        
+        document.querySelector('.btn-cancel').addEventListener('click', function() {
+            if(confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
+                window.location.href = 'employer.html';
+            }
+        });
+        
+        // Delete job confirmation
+        document.querySelectorAll('.btn-danger').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(confirm('Are you sure you want to delete this job post? This action cannot be undone.')) {
+                    alert('Job deleted successfully!');
+                    window.location.href = 'employer.html';
+                }
+            });
+        });
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

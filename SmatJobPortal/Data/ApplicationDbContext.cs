@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SmatJobPortal.Data.Migrations;
 
 namespace SmatJobPortal.Data
 {
@@ -12,6 +11,7 @@ namespace SmatJobPortal.Data
         }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<JobApply> JobApply { get; set; }
+        public DbSet<ProfileView> ProfileViews { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -29,6 +29,11 @@ namespace SmatJobPortal.Data
                 .WithMany(u => u.JobApplies)
                 .HasForeignKey(ja => ja.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Unique profile view per viewer per viewed user
+            builder.Entity<ProfileView>()
+                .HasIndex(p => new { p.ViewedUserId, p.ViewerUserId })
+                .IsUnique();
         }
     }
 }

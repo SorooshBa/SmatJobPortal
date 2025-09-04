@@ -1,0 +1,58 @@
+@model IEnumerable<SmatJobPortal.Data.JobApply>
+<section class="dashboard-section">
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Job Applications</h1>
+            <div class="header-actions">
+                <form method="get" class="filter-row">
+                    <div class="filter-group">
+                        <select name="jobId">
+                            <option value="">All Jobs</option>
+                            @foreach (var job in (IEnumerable<SmatJobPortal.Data.Job>)ViewBag.Jobs)
+                            {
+                                <option value="@job.Id">@job.JobTitle</option>
+                            }
+                        </select>
+                    </div>
+                    <button class="btn" type="submit">Filter</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-main">
+                <div class="dashboard-card">
+                    <div class="applications-list">
+                        @foreach (var item in Model)
+                        {
+                            <div class="application">
+                                <div class="application-info">
+                                    <h3>@item.Job.JobTitle</h3>
+                                    <p><strong>Applicant:</strong> @item.FullName</p>
+                                    <p><strong>Email:</strong> @item.Email</p>
+                                    <p><strong>Applied:</strong> @(Math.Round((DateTime.Now - item.AppliedAt).TotalDays) + 1) days ago</p>
+                                    <p><strong>Status:</strong> @item.Status</p>
+                                </div>
+                                <div class="application-actions">
+                                    @if (!string.IsNullOrWhiteSpace(item.ResumePath))
+                                    {
+                                        <a href="@item.ResumePath" target="_blank" class="btn btn-small">View Resume</a>
+                                    }
+                                    @if (item.Status != SmatJobPortal.Data.JobApplyStatus.Accepted)
+                                    {
+                                        <form asp-controller="EmployerDashboard" asp-action="AcceptApplication" method="post" style="display:inline">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-small">Accept</button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

@@ -1,0 +1,34 @@
+@model SmatJobPortal.Data.JobApply
+<section class="dashboard-section">
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Application Details</h1>
+        </div>
+        <div class="dashboard-content">
+            <div class="dashboard-main">
+                <div class="dashboard-card">
+                    <div class="application">
+                        <div class="application-info">
+                            <h3>@Model.Job.JobTitle</h3>
+                            <p><strong>Applied at:</strong> @Model.AppliedAt</p>
+                            <p><strong>Full name:</strong> @Model.FullName</p>
+                            <p><strong>Email:</strong> @Model.Email</p>
+                            @if (!string.IsNullOrWhiteSpace(Model.ResumePath))
+                            {
+                                <p><a class="btn btn-small" href="@Model.ResumePath" target="_blank">View Resume</a></p>
+                            }
+                        </div>
+                        <div class="application-actions">
+                            <form asp-controller="SeekerDashboard" asp-action="Withdraw" method="post">
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <button type="submit" class="btn btn-small btn-danger">Withdraw Application</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

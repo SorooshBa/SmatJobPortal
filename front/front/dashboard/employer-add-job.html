@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post New Job - Smart Job Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>Smart<span>Jobs</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../jobs/list.html">Browse Jobs</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fas fa-user-circle"></i> John Doe <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="employer.html">Dashboard</a></li>
+                            <li><a href="employer-add-job.html" class="active">Post New Job</a></li>
+                            <li><a href="employer-view-applications.html">View Applications</a></li>
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="../auth/login.html">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="burger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Post a New Job</h1>
+                <a href="employer.html" class="btn">Back to Dashboard</a>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="dashboard-main">
+                    <div class="dashboard-card">
+                        <form id="jobPostForm">
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title*</label>
+                                <input type="text" id="jobTitle" name="jobTitle" required placeholder="e.g. Senior Frontend Developer">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="jobType">Job Type*</label>
+                                    <select id="jobType" name="jobType" required>
+                                        <option value="">Select Job Type</option>
+                                        <option value="full-time">Full-time</option>
+                                        <option value="part-time">Part-time</option>
+                                        <option value="contract">Contract</option>
+                                        <option value="internship">Internship</option>
+                                        <option value="remote">Remote</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jobCategory">Category*</label>
+                                    <select id="jobCategory" name="jobCategory" required>
+                                        <option value="">Select Category</option>
+                                        <option value="software">Software Development</option>
+                                        <option value="design">Design</option>
+                                        <option value="marketing">Marketing</option>
+                                        <option value="business">Business</option>
+                                        <option value="customer-service">Customer Service</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="jobLocation">Location*</label>
+                                    <input type="text" id="jobLocation" name="jobLocation" required placeholder="e.g. New York, NY or Remote">
+                                </div>
+                                <div class="form-group">
+                                    <label for="jobSalary">Salary Range</label>
+                                    <input type="text" id="jobSalary" name="jobSalary" placeholder="e.g. $80,000 - $100,000">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobDescription">Job Description*</label>
+                                <textarea id="jobDescription" name="jobDescription" rows="8" required placeholder="Detailed description of the job responsibilities and requirements"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobRequirements">Requirements*</label>
+                                <textarea id="jobRequirements" name="jobRequirements" rows="6" required placeholder="List the skills and qualifications required"></textarea>
+                                <small>Separate requirements with bullet points or numbers</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobBenefits">Benefits (Optional)</label>
+                                <textarea id="jobBenefits" name="jobBenefits" rows="4" placeholder="List any benefits you offer"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="applicationDeadline">Application Deadline</label>
+                                <input type="date" id="applicationDeadline" name="applicationDeadline">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Post Job</button>
+                                <button type="button" class="btn btn-cancel">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="dashboard-sidebar">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2>Tips for Posting</h2>
+                        </div>
+                        <div class="tips-list">
+                            <div class="tip-item">
+                                <i class="fas fa-lightbulb"></i>
+                                <p>Be specific about the job title and responsibilities</p>
+                            </div>
+                            <div class="tip-item">
+                                <i class="fas fa-lightbulb"></i>
+                                <p>Clearly list required skills and qualifications</p>
+                            </div>
+                            <div class="tip-item">
+                                <i class="fas fa-lightbulb"></i>
+                                <p>Highlight your company culture and benefits</p>
+                            </div>
+                            <div class="tip-item">
+                                <i class="fas fa-lightbulb"></i>
+                                <p>Use bullet points for better readability</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>Smart Job Portal connects job seekers with employers efficiently and effectively.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../jobs/list.html">Browse Jobs</a></li>
+                        <li><a href="../auth/login.html">Login</a></li>
+                        <li><a href="../auth/register.html">Register</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@smartjobportal.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Smart Job Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('jobPostForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Job posted successfully!');
+            window.location.href = 'employer.html';
+        });
+        
+        document.querySelector('.btn-cancel').addEventListener('click', function() {
+            if(confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
+                window.location.href = 'employer.html';
+            }
+        });
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

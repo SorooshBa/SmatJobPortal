@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmatJobPortal.Data;
 
@@ -11,9 +12,11 @@ using SmatJobPortal.Data;
 namespace SmatJobPortal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250904075050_alot of things")]
+    partial class alotofthings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,9 +331,6 @@ namespace SmatJobPortal.Data.Migrations
                     b.Property<string>("ResumePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()

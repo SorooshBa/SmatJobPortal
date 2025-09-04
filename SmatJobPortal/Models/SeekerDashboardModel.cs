@@ -1,5 +1,4 @@
 ﻿using SmatJobPortal.Data;
-using SmatJobPortal.Data.Migrations;
 
 namespace SmatJobPortal.Models
 {

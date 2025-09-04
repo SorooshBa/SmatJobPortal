@@ -41,38 +41,33 @@
                 <div class="dashboard-card">
                     <div class="card-header">
                         <h2>Recent Applications</h2>
-                        <a href="#" class="view-all">View All</a>
+                        <a asp-controller="EmployerDashboard" asp-action="ViewApplications" class="view-all">View All</a>
                     </div>
                     <div class="applications-list">
-                        <div class="application">
-                            <div class="application-info">
-                                <h3>Frontend Developer Position</h3>
-                                <p><strong>Applicant:</strong> Sarah Johnson</p>
-                                <p><strong>Applied:</strong> 2 days ago</p>
+                        @foreach (var item in Model.jobApplies)
+                        {
+
+                            <div class="application">
+                                <div class="application-info">
+                                    <h3>@item.Job.JobTitle</h3>
+                                    <p><strong>Applicant:</strong> @item.FullName</p>
+                                    <p><strong>Applied:</strong> @(Math.Round((DateTime.Now - item.AppliedAt).TotalDays) + 1) days ago</p>
+                                </div>
+                                <div class="application-status pending">Pending Review</div>
+                                <div class="application-actions">
+                                    <a href="#" class="btn btn-small">View</a>
+                                </div>
                             </div>
-                            <div class="application-status pending">Pending Review</div>
-                            <div class="application-actions">
-                                <a href="#" class="btn btn-small">View</a>
-                            </div>
-                        </div>
-                        <div class="application">
-                            <div class="application-info">
-                                <h3>UX Designer Position</h3>
-                                <p><strong>Applicant:</strong> Michael Brown</p>
-                                <p><strong>Applied:</strong> 1 week ago</p>
-                            </div>
-                            <div class="application-status reviewed">Reviewed</div>
-                            <div class="application-actions">
-                                <a href="#" class="btn btn-small">View</a>
-                            </div>
-                        </div>
+
+                        }
+
                     </div>
                 </div>
 
                 <div class="dashboard-card">
                     <div class="card-header">
                         <h2>Your Job Postings</h2>
-                        <a href="#" class="view-all">View All</a>
+                        <a asp-controller="EmployerDashboard" asp-action="ViewApplications" class="view-all">View Applicants</a>
                     </div>
                     <div class="jobs-list">
                         @foreach (var item in Model.YourJobPostings)
@@ -85,7 +80,8 @@
                                     <p><i class="fas fa-clock"></i> Posted Less Than @(Math.Round((DateTime.Now-item.AddedTime).TotalDays)+1) days ago</p>
                                 </div>
                                 <div class="job-stats">
-                                    <span>12 Applications</span>
+                                    <a asp-controller="EmployerDashboard" asp-action="ViewApplications" asp-route-jobId="@item.Id">@item.JobApplies?.Count() Applications</a>
+                                    @if(!item.IsApproved){<span class="status-indicator status-new">Pending Approval</span>}
                                 </div>
                                 <div class="job-actions">
                                     <a asp-action="EditJob" asp-route-id="@item.Id"

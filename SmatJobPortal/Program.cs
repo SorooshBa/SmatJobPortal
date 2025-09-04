@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SmatJobPortal.Data;
 using SmatJobPortal.Models;
+using Microsoft.AspNetCore.Authentication.Google;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,24 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Social login (Google) – only configure if credentials are present
+var googleClientId = builder.Configuration["Authentication:Google:ClientId"];
+var googleClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+if (!string.IsNullOrWhiteSpace(googleClientId) && !string.IsNullOrWhiteSpace(googleClientSecret))
+{
+    builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+    {
+        googleOptions.ClientId = googleClientId;
+        googleOptions.ClientSecret = googleClientSecret;
+    });
+}
+
+// Caching
+builder.Services.AddMemoryCache();
+
+// SignalR
+builder.Services.AddSignalR();
 
 builder.Services.AddControllersWithViews();
 
@@ -59,5 +78,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+// SignalR hubs
+app.MapHub<SmatJobPortal.RealTime.NotificationHub>("/hubs/notifications");
 
 app.Run();

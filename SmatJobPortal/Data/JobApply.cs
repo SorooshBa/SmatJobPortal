@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SmatJobPortal.Data.Migrations
+namespace SmatJobPortal.Data
 {
     public class JobApply
     {
@@ -14,7 +14,7 @@ namespace SmatJobPortal.Data.Migrations
         public string Email { get; set; }
 
         public string PhoneNumber { get; set; }
-        public string Resume { get; set; }
+
         public string CoverLetter { get; set; }
         public string Portfolio { get; set; }
 
@@ -25,5 +25,20 @@ namespace SmatJobPortal.Data.Migrations
 
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
+
+        public string ResumePath { get; set; }
+
+        public JobApplyStatus Status { get; set; } = JobApplyStatus.New;
+
+    }
+
+    public enum JobApplyStatus
+    {
+        New,
+        Reviewed,
+        Interview,
+        Accepted,
+        Rejected,
+        Withdrawn
     }
 }

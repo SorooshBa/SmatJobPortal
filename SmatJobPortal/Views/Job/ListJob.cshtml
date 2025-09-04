@@ -3,24 +3,63 @@
     <div class="container">
         <div class="search-filters">
             <h2>Find Your Perfect Job</h2>
-            <div class="filter-row">
+            <form method="get" class="filter-row">
                 <div class="filter-group">
-                    <input type="text" placeholder="Job title, keywords">
+                    <input type="text" name="q" value="@Model.Query" placeholder="Job title, keywords">
                 </div>
                 <div class="filter-group">
-                    <input type="text" placeholder="Location">
+                    <input type="text" name="location" value="@Model.Location" placeholder="Location">
                 </div>
                 <div class="filter-group">
-                    <select>
-                        <option value="">All Categories</option>
-                        <option value="software">Software Development</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="healthcare">Healthcare</option>
-                        <option value="education">Education</option>
+                    <select name="category">
+                        @if (string.IsNullOrEmpty(Model.Category))
+                        {
+                            <option value="" selected>All Categories</option>
+                        }
+                        else
+                        {
+                            <option value="">All Categories</option>
+                        }
+
+                        @if (Model.Category == "software")
+                        {
+                            <option value="software" selected>Software Development</option>
+                        }
+                        else
+                        {
+                            <option value="software">Software Development</option>
+                        }
+
+                        @if (Model.Category == "marketing")
+                        {
+                            <option value="marketing" selected>Marketing</option>
+                        }
+                        else
+                        {
+                            <option value="marketing">Marketing</option>
+                        }
+
+                        @if (Model.Category == "healthcare")
+                        {
+                            <option value="healthcare" selected>Healthcare</option>
+                        }
+                        else
+                        {
+                            <option value="healthcare">Healthcare</option>
+                        }
+
+                        @if (Model.Category == "education")
+                        {
+                            <option value="education" selected>Education</option>
+                        }
+                        else
+                        {
+                            <option value="education">Education</option>
+                        }
                     </select>
                 </div>
-                <button class="btn">Search</button>
-            </div>
+                <button class="btn" type="submit">Search</button>
+            </form>
         </div>
     </div>
 </section>
@@ -28,15 +67,52 @@
 <section class="job-listings">
     <div class="container">
         <div class="listings-header">
-            <h3>Showing <span id="jobCount">24</span> Jobs</h3>
+            <h3>Showing <span id="jobCount">@Model.TotalCount</span> Jobs</h3>
             <div class="sort-by">
                 <span>Sort by:</span>
-                <select id="sortJobs">
-                    <option value="newest">Newest</option>
-                    <option value="oldest">Oldest</option>
-                    <option value="salary-high">Salary (High to Low)</option>
-                    <option value="salary-low">Salary (Low to High)</option>
-                </select>
+                <form method="get">
+                    <input type="hidden" name="q" value="@Model.Query" />
+                    <input type="hidden" name="location" value="@Model.Location" />
+                    <input type="hidden" name="category" value="@Model.Category" />
+                    <input type="hidden" name="page" value="@Model.Page" />
+                    <select id="sortJobs" name="sort" onchange="this.form.submit()">
+                        @if (Model.Sort == null || Model.Sort == "newest")
+                        {
+                            <option value="newest" selected>Newest</option>
+                        }
+                        else
+                        {
+                            <option value="newest">Newest</option>
+                        }
+
+                        @if (Model.Sort == "oldest")
+                        {
+                            <option value="oldest" selected>Oldest</option>
+                        }
+                        else
+                        {
+                            <option value="oldest">Oldest</option>
+                        }
+
+                        @if (Model.Sort == "salary-high")
+                        {
+                            <option value="salary-high" selected>Salary (High to Low)</option>
+                        }
+                        else
+                        {
+                            <option value="salary-high">Salary (High to Low)</option>
+                        }
+
+                        @if (Model.Sort == "salary-low")
+                        {
+                            <option value="salary-low" selected>Salary (Low to High)</option>
+                        }
+                        else
+                        {
+                            <option value="salary-low">Salary (Low to High)</option>
+                        }
+                    </select>
+                </form>
             </div>
         </div>
 
@@ -66,16 +142,46 @@
             }
         </div>
 
+        @{
+            var totalPages = (int)Math.Ceiling((double)Model.TotalCount / Model.PageSize);
+        }
         <div class="pagination">
-            <button class="btn-prev" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+            <form method="get" style="display:inline">
+                <input type="hidden" name="q" value="@Model.Query" />
+                <input type="hidden" name="location" value="@Model.Location" />
+                <input type="hidden" name="category" value="@Model.Category" />
+                <input type="hidden" name="sort" value="@Model.Sort" />
+                <input type="hidden" name="page" value="@(Model.Page-1)" />
+                <button class="btn-prev" @(Model.Page<=1?"disabled":null)><i class="fas fa-chevron-left"></i> Previous</button>
+            </form>
             <div class="page-numbers">
-                <span class="active">1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>...</span>
-                <span>10</span>
+                @for (var i = 1; i <= totalPages; i++)
+                {
+                    if (i == Model.Page)
+                    {
+                        <span class="active">@i</span>
+                    }
+                    else
+                    {
+                        <form method="get" style="display:inline">
+                            <input type="hidden" name="q" value="@Model.Query" />
+                            <input type="hidden" name="location" value="@Model.Location" />
+                            <input type="hidden" name="category" value="@Model.Category" />
+                            <input type="hidden" name="sort" value="@Model.Sort" />
+                            <input type="hidden" name="page" value="@i" />
+                            <button type="submit" class="btn" style="padding:8px 12px">@i</button>
+                        </form>
+                    }
+                }
             </div>
-            <button class="btn-next">Next <i class="fas fa-chevron-right"></i></button>
+            <form method="get" style="display:inline">
+                <input type="hidden" name="q" value="@Model.Query" />
+                <input type="hidden" name="location" value="@Model.Location" />
+                <input type="hidden" name="category" value="@Model.Category" />
+                <input type="hidden" name="sort" value="@Model.Sort" />
+                <input type="hidden" name="page" value="@(Model.Page+1)" />
+                <button class="btn-next" @(Model.Page>=totalPages?"disabled":null)>Next <i class="fas fa-chevron-right"></i></button>
+            </form>
         </div>
     </div>
 </section>

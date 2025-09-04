@@ -1,0 +1,38 @@
+@model IEnumerable<SmatJobPortal.Data.Job>
+<section class="dashboard-section">
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Pending Job Approvals</h1>
+        </div>
+        <div class="dashboard-content">
+            <div class="dashboard-main">
+                <div class="dashboard-card">
+                    <div class="jobs-list">
+                        @foreach(var job in Model)
+                        {
+                            <div class="job-item">
+                                <div class="job-info">
+                                    <h3>@job.JobTitle</h3>
+                                    <p><i class="fas fa-map-marker-alt"></i>@job.JobLocation</p>
+                                    <p>Employer: @job.EmployerUser?.FullName</p>
+                                </div>
+                                <div class="job-actions">
+                                    <form asp-controller="Admin" asp-action="ApproveJob" method="post" style="display:inline">
+                                        <input type="hidden" name="id" value="@job.Id" />
+                                        <button type="submit" class="btn btn-small">Approve</button>
+                                    </form>
+                                    <form asp-controller="Admin" asp-action="RejectJob" method="post" style="display:inline">
+                                        <input type="hidden" name="id" value="@job.Id" />
+                                        <button type="submit" class="btn btn-small btn-danger">Reject</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
